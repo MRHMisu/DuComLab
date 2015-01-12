@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -Cyber Center Dhaka University</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+<style>
+        footer {
+    width: 100%;
+    height:auto;
+    background:black;
+    float: left;
+    margin: 0 0 .5% 0;
+    border: 10px;
+    box-shadow: 5px 5px 10px #202020
+}   
+
+</style>
+</head>
+<body style="font-family:'Times New Roman', Times, serif">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:black">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Cyber Center", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+
+                            if (Roles.IsUserInRole("System Admin") || Roles.IsUserInRole("Regular Admin"))
+                            {
+                                if (Roles.IsUserInRole("System Admin"))
+                                {
+                                    <li>@Html.ActionLink(" Register Admin", "RegisterUser", "Account")</li>
+                                    <li>@Html.ActionLink("Generate Cards", "ShowCards", "Card")</li>
+                                    <li>@Html.ActionLink("Prepare Balance Sheet", "ShowBalanceSheet", "BalanceSheet")</li>
+
+                                }
+
+
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Active User<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("View Active User", "ViewActiveUser", "ActiveUser")</li>
+                                        <li>@Html.ActionLink(" Remove Card from active list ", "ShowParticularCard", "ActiveUser")</li>
+                                        <li>@Html.ActionLink("Refresh Active User List", "RefreshAll", "ActiveUser")</li>
+
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Student<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Register Student", "RegisterStudent", "Regestration")</li>
+                                        <li>@Html.ActionLink("Update Student", "SearchStudent", "Student")</li>
+
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">History<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("View History", "ShowHistory", "History")</li>
+                                        <li>@Html.ActionLink("View Card Usage", "ShowCardUsage", "ParticularCardUsage")</li>
+
+                                    </ul>
+                                </li>
+                            }
+
+                            <li>@Html.ActionLink("Log Out", "Logout", "Account")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink(" Log in", "Login", "Account")</li>
+
+
+                        }
+
+                    }
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="container body-content" style="font-family:'Times New Roman', Times, serif">
+        @RenderBody()
+    </div>
+    <br/>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div>
+        <footer align="center">
+                <p align ="center">
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                                <span style="color:white " align="center"><strong style="font-size:medium">Logged in as:&nbsp;@User.Identity.Name</strong></span>
+                        }
+
+                    }
+                </p align>
+                <p style="color:white " align="center">
+                    <strong> &copy; @DateTime.Now.Year -University of Dhaka, All rights reserved</strong>
+                    <br />
+                    <strong>Powered by IIT DU</strong><br/>
+                    <strong>Developed by B.S (Hons.) Software Engineering 5<sup>th</sup> Batch ( IIT DU )</strong>
+                </p>
+        </footer>
+
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

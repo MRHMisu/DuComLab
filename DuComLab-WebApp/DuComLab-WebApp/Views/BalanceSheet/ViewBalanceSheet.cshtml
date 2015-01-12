@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BusinessLayer.BalanceSheet>
+
+@{
+    ViewBag.Title = "ViewBalanceSheet";
+}
+
+<br />
+
+<h2>Requested Balance Sheet</h2>
+
+<p>
+    @Html.ActionLink("Download ", "Download", null, new { @class = "btn btn-success" })
+</p>
+
+<style>
+    .table {
+        width: auto;
+    }
+
+    td, th {
+        text-align: center;
+    }
+
+    .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+        background-color: #93f6ea;
+    }
+
+    
+   p,h2,h6,div{
+        font-family:'Times New Roman', Times, serif;
+    }
+</style>
+
+<table class="table table-striped table-bordered table-hover ">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Number of Cards
+        </th>
+        <th>
+            Unit Prise
+        </th>
+        <th>
+            Amount
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.NumberOfCards)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+        </tr>
+    }
+
+</table>
